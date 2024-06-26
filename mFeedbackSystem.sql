@@ -1,4 +1,4 @@
-create database mBankFeedbackSystem;
+create database mFeedbackSystem;
 go
 
 -- Tabela u¿ytkowników
@@ -71,3 +71,5 @@ GO
 
 insert into Users(UserId, UserName, Email, Role, CreatedAt, PasswordHash)
     values(1, 'admin', 'admin', 1, getdate(), '')
+
+SELECT * FROM Users
