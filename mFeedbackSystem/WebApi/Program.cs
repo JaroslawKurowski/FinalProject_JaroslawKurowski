@@ -6,6 +6,8 @@ using Microsoft.OpenApi.Models;
 using Persistence.Context;
 using Persistence.Repositories;
 using WebApi.Auth;
+using Domain.Models;
+using System.Security.Claims;
 
 namespace WebApi
 {
@@ -70,6 +72,23 @@ namespace WebApi
             builder.Services.AddSingleton<IUserService, UserService>();
             builder.Services.AddSingleton<JwtTokenService>();
 
+            builder.Services.AddHttpContextAccessor(); //ta linia jest niezbêdna do pobierania HttpContext
+            builder.Services.AddScoped<LoggedUser>(serviceProvider =>
+            {
+                var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
+                var identity = httpContextAccessor.HttpContext?.User.Identity as ClaimsIdentity;
+                if (identity == null || !identity.Claims.Any())
+                    return new LoggedUser(0, "", "", UserRole.Anonymous); //nie mo¿emy wstrzykn¹æ null-a, dlatego tworzymy zalogowanego usera, który nie jest zalogowany.
+
+                var claims = identity.Claims.ToDictionary(k => k.Type);
+                return new LoggedUser(
+                    int.Parse(claims[ClaimTypes.NameIdentifier].Value),
+                    claims[ClaimTypes.Name].Value,
+                    claims[ClaimTypes.Email].Value,
+                    Enum.Parse<UserRole>(claims[ClaimTypes.Role].Value)
+                );
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -83,7 +102,6 @@ namespace WebApi
 
             app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.MapControllers();
 
