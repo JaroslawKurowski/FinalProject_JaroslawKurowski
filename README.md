@@ -117,7 +117,73 @@ Użycie
 
 Ta biblioteka jest zaprojektowana do użycia w połączeniu z warstwą dostępu do danych oraz warstwą usług, aby zapewnić pełne rozwiązanie do zarządzania zgłoszeniami użytkowników, działaniami administracyjnymi oraz nagrodami użytkowników.
 
-4. 
+We właściwościach celowo użyto odpowiednich akcesorów dostępu get/set:
+-jeżeli jest sam get to właściwość należy ustawić wyłącznie w konstruktorze po odczycie danych z bazy danych i nie można jej modyfikować,
+-jeżeli jest get z prywatnym set to właściwość należy ustawić w konstruktorze po odczycie danych z bazy danych i można ją modyfikować przy pomocy odpowiednich metod dodanych do modelu biznesowego.
 
-5. 
+4. Projekt `Persistence` z Dapperem
+
+Utworzenie projektu typu biblioteka dla warstwy dostępu do danych. 
+
+Projekt ten jest odpowiedzialny za zarządzanie połączeniami z bazą danych oraz operacjami CRUD (tworzenie, odczyt, aktualizacja, usuwanie) na różnych encjach. Biblioteka zawiera interfejsy i klasy kontekstu do obsługi połączeń z bazą danych oraz generyczne repozytoria do operacji CRUD.
+
+Instalacja paczki NuGet z Dapperem.
+
+Utworzenie folderu Context z:
+a)	interfejsem IDapperContext z metodą IDbConnection CreateConnection() - odpowiedzialną za połączenie z bazą danych,
+b)	implementacją DapperContext z kontruktorem, który przyjmuje IConfiguration i używa connection string DefaultConnection - odpowiedzialne za konfigurację połączenia z bazą danych przy użyciu ustawień konfiguracyjnych.
+
+Utworzenie folderu Repositories z publicznym interfejsem generycznym IGenericRepository<TModel>, który będziemy potem implementować jako konkretny publiczny interfejs dla modelu wraz z implementacją w klasie.
+
+5.  Projekt `Application`
+
+Utowrzenie projektu typu biblioteka dla warstwy aplikacji.
+
+Biblioteka klas Application dostarcza warstwę usług, która pełni rolę fasady nad repozytoriami danych w projekcie. Usługi w tej warstwie są odpowiedzialne za obsługę logiki biznesowej i komunikację z warstwą dostępu do danych (repozytoria). Każdy serwis jest reprezentowany przez interfejs, który definiuje metody związane z poszczególnymi dziedzinami aplikacji, takimi jak użytkownicy, raporty czy promocje.
+Każdy interfejs serwisu definiuje metody związane z daną dziedziną aplikacji. Będą one rozbudowywane w miarę dodawania logiki biznesowej do aplikacji.
+
+Interfejsy pozwalają komunikować się z odpowiednimi repozytoriami w celu wykonywania operacji na danych. Dzięki temu warstwa aplikacji jest oddzielona od warstwy dostępu do danych, co ułatwia zarządzanie kodem i testowanie.
+
+6.  Projekt `WebApi`
+
+Utworzenie projektu ASP.NET Core WebAPI.
+
+Konfiguracja obsługi Swaggera.
+
+Konfiguracja projektu tak, aby mógł się łączyć z bazą danych:
+a)	konfigurację appsettings.json z connection stringiem,
+b)	rejestracja IDapperContext w Dependency Injection.
+
+Utworzenie folderu Auth z:
+a)	klasą LoggedUser, która implementuje interfejs IUser (będzie wykorzystywana w kontrolerach do pobrania aktualnie zalogowanego użytkownika),
+b)	rejestracja klasy LoggedUser w Dependency Injection 
+
+7.  Uwierzytelnianie użytkownika w systemie
+
+•	Utworzenie kontrolera AuthController z metodą HttpPost: IActionResult Login([FromBody] LoginModel model) do logowania użytkownika.
+
+Jest on odpowiedzialny za obsługę logowania użytkowników oraz autoryzację za pomocą tokenów JWT.
+
+•	Utworzenie folderu DTOs z modelem LoginModel z nazwą użytkownika oraz hash-em hasła.
+
+•	Rozszerzenie interfejsu serwisu IUserService i jego implementacji UserService o metodę User Authenticate(username, password), która weryfikuje poprawność danych komunikując się z repozytorium użytkowników.
+Repozytorium IUserRepository definiuje metodę Authenticate, która sprawdza poprawność danych logowania w bazie danych. Implementacja UserRepository realizuje tę metodę, używając Dappera do komunikacji z bazą danych.
+
+•	Użycie JWT do uwierzytelniania i przechowywania uprawnień/ról:
+   o	Instalacja paczki NuGet Microsoft.AspNetCore.Authentication.JwtBearer.
+   o	Konfiguracja JWT w projekcie WebAPI wraz z użyciem middleware. Konfiguracja JWT odbywa się w pliku Program.cs, gdzie dodawane są usługi uwierzytelniania i autoryzacji. Tokeny są konfigurowane za pomocą klucza symetrycznego i zawierają informacje o wydawcy, odbiorcy oraz czasie ważności.
+   o	Utworzenie serwisu JwtTokenService do generowania tokenów JWT dla zalogowanego użytkownika.
+   
+•	Użycie atrybutu [Authorize] na kontrolerach, dzięki czemu wszystkie punkty API są zabezpieczone, a dostęp do nich wymaga wcześniejszego zalogowania.
+
+
+8. CRUD dla zgłoszeń.
+9.	CRUD dla promocji.
+10.	Akcje administratora dotyczące zgłoszenia.
+11.	Modyfikacja statusu zgłoszenia.
+12.	Nadawanie punktów innowacyjności.
+13.	Zliczanie punktów innowacyjności.
+14.	Logowanie zdarzeń w systemie z Serilog.
+15.	Aplikacja WWW w React do obsługi zgłoszeń (logowanie; dla Usera dodanie zgłoszenia i prezentacja promocji na podstawie zliczonych punktów).
+
    
