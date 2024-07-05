@@ -24,7 +24,7 @@ namespace WebApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TaskManager WebApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "FeedbackSystem WebApi", Version = "v1" });
 
                 // Konfiguracja Swaggera do u¿ywania tokenów Bearer
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -70,6 +70,8 @@ namespace WebApi
             builder.Services.AddSingleton<IDapperContext, DapperContext>();
             builder.Services.AddSingleton<IUserRepository, UserRepository>();
             builder.Services.AddSingleton<IUserService, UserService>();
+            builder.Services.AddScoped<IReportRepository, ReportRepository>();
+            builder.Services.AddScoped<IReportService, ReportService>();
             builder.Services.AddSingleton<JwtTokenService>();
 
             builder.Services.AddHttpContextAccessor(); //ta linia jest niezbêdna do pobierania HttpContext

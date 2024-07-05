@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,27 @@ namespace Domain.Models
             CreatedAt = createdAt;
             ModifiedBy = modifiedBy;
             ModifiedAt = modifiedAt;
+        }
+
+        public static Report Create(string title, string description, int createdBy)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+                throw new ValidationException("Tytuł nie może być pusty.");
+            if (string.IsNullOrWhiteSpace(description))
+                throw new ValidationException("Opis nie może być pusty.");
+
+            return new Report(
+                0, // ReportId będzie generowany przez bazę danych
+                title,
+                description,
+                ReportStatus.Pending,
+                null,
+                null,
+                createdBy,
+                DateTime.UtcNow,
+                null,
+                null
+            );
         }
     }
 }
