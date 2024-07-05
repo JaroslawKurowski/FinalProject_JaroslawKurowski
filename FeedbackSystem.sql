@@ -1,9 +1,14 @@
-create database mFeedbackSystem;
-go
+-- Tworzenie bazy danych
+CREATE DATABASE FeedbackSystem;
+GO
+
+-- U¿ywanie nowo utworzonej bazy danych
+USE FeedbackSystem;
+GO
 
 -- Tabela u¿ytkowników
 CREATE TABLE Users (
-    UserId INT PRIMARY KEY,
+    UserId INT IDENTITY(1,1) PRIMARY KEY,
     UserName NVARCHAR(100) NOT NULL,
     Email NVARCHAR(100) NOT NULL,
     Role INT NOT NULL,
@@ -14,10 +19,10 @@ CREATE TABLE Users (
 
 -- Tabela zg³oszeñ
 CREATE TABLE Reports (
-    ReportId INT PRIMARY KEY,
-	Title NVARCHAR(255) NOT NULL,
-	Description NVARCHAR(MAX) NOT NULL,
-	Status INT NOT NULL DEFAULT 'Pending',
+    ReportId INT IDENTITY(1,1) PRIMARY KEY,
+    Title NVARCHAR(255) NOT NULL,
+    Description NVARCHAR(MAX) NOT NULL,
+    Status INT NOT NULL DEFAULT 0, -- 0 = Pending
     StartDate DATETIME NULL,
     EndDate DATETIME,
     CreatedBy INT NOT NULL,
@@ -31,7 +36,7 @@ CREATE TABLE Reports (
 
 -- Tabela akcji administratora
 CREATE TABLE AdminActions (
-    ActionId INT PRIMARY KEY, -- przemyœleæ IDENTITY
+    ActionId INT IDENTITY(1,1) PRIMARY KEY,
     ReportId INT NOT NULL,
     AdminId INT NOT NULL,
     Action INT NOT NULL,
@@ -39,11 +44,10 @@ CREATE TABLE AdminActions (
     CONSTRAINT FK_AdminActions_ReportId FOREIGN KEY (ReportId) REFERENCES Reports(ReportId),
     CONSTRAINT FK_AdminActions_AdminId FOREIGN KEY (AdminId) REFERENCES Users(UserId)
 );
--- Dostêpne akcje: 'View', 'Respond', 'ChangeStatus', 'AssignPoints', 'Close'
 
 -- Tabela punktów innowacyjnoœci
 CREATE TABLE InnovationPoints (
-    PointId INT PRIMARY KEY,
+    PointId INT IDENTITY(1,1) PRIMARY KEY,
     UserId INT NOT NULL,
     Points INT NOT NULL,
     FOREIGN KEY (UserId) REFERENCES Users(UserId)
@@ -51,7 +55,7 @@ CREATE TABLE InnovationPoints (
 
 -- Tabela promocyjnych us³ug
 CREATE TABLE Promotions (
-    PromotionId INT PRIMARY KEY,
+    PromotionId INT IDENTITY(1,1) PRIMARY KEY,
     PromotionName NVARCHAR(200) NOT NULL,
     Description NVARCHAR(MAX) NOT NULL,
     PointsRequired INT NOT NULL
@@ -59,7 +63,7 @@ CREATE TABLE Promotions (
 
 -- Tabela realizacji promocji przez u¿ytkowników
 CREATE TABLE UserPromotions (
-    UserPromotionId INT PRIMARY KEY,
+    UserPromotionId INT IDENTITY(1,1) PRIMARY KEY,
     UserId INT NOT NULL,
     PromotionId INT NOT NULL,
     RedeemedAt DATETIME NOT NULL DEFAULT GETDATE(),
@@ -67,9 +71,19 @@ CREATE TABLE UserPromotions (
     CONSTRAINT FK_UserPromotions_PromotionId FOREIGN KEY (PromotionId) REFERENCES Promotions(PromotionId)
 );
 
-GO
+-- Dodanie predefiniowanych u¿ytkowników
+INSERT INTO Users (UserName, Email, Role, CreatedAt, PasswordHash)
+VALUES 
+('admin', 'admin@mail.com', 1, GETDATE(), 'Admin12#'),
+('user', 'user1@mail.com', 0, GETDATE(), 'User345#');
 
-insert into Users(UserId, UserName, Email, Role, CreatedAt, PasswordHash)
-    values(1, 'admin', 'admin', 1, getdate(), '')
+-- Dodanie przyk³adowych promocji
+INSERT INTO Promotions (PromotionName, Description, PointsRequired)
+VALUES 
+('Discount on Loan', 'Get a discount on your next loan', 100),
+('Free Bank Transfer', 'Enjoy free bank transfers for a month', 50),
+('Premium Support', 'Get access to premium customer support', 200);
 
-SELECT * FROM Users
+SELECT * from Users;
+
+SELECT HASHBYTES('SHA2_256', 'Test12#');
