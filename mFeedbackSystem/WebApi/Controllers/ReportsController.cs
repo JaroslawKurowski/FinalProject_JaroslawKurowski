@@ -46,7 +46,7 @@ namespace WebApi.Controllers
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var report = await _reportService.Create(model.Title, model.Description, _loggedUser.UserId);
+            var report = await _reportService.CreateAsync(model.Title, model.Description, _loggedUser.UserId);
             if (report == null)
                 return BadRequest("Nie udało się utworzyć zgłoszenia.");
 

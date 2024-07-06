@@ -17,10 +17,10 @@ namespace Application.Services
             _reportRepository = reportRepository;
         }
 
-        public async Task<Report?> Create(string title, string description, int createdBy)
+        public async Task<Report?> CreateAsync(string title, string description, int createdBy)
         {
             var report = Report.Create(title, description, createdBy);
-            return await _reportRepository.Create(report);
+            return await _reportRepository.CreateAsync(report);
         }
     }
 }

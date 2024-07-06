@@ -28,13 +28,13 @@ namespace Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<Report?> Create(Report report)
+        public async Task<Report?> CreateAsync(Report report)
         {
             using (var connection = _context.CreateConnection())
             {
                 var sql = @"
-                    INSERT INTO Reports (Title, Description, Status, StartDate, EndDate, CreatedBy, CreatedAt, ModifiedBy, ModifiedAt)
-                    VALUES (@Title, @Description, @Status, @StartDate, @EndDate, @CreatedBy, @CreatedAt, @ModifiedBy, @ModifiedAt);
+                    INSERT INTO Reports (Title, Description, Status, StartDate, EndDate, CreatedBy, CreatedAt, ModifiedBy, ModifiedAt, IsDeleted)
+                    VALUES (@Title, @Description, @Status, @StartDate, @EndDate, @CreatedBy, @CreatedAt, @ModifiedBy, @ModifiedAt, @IsDeleted);
                     SELECT CAST(SCOPE_IDENTITY() as int);";
                 var id = await connection.ExecuteScalarAsync<int>(sql, report);
                 return new Report(
@@ -47,12 +47,23 @@ namespace Persistence.Repositories
                     report.CreatedBy,
                     report.CreatedAt,
                     report.ModifiedBy,
-                    report.ModifiedAt
+                    report.ModifiedAt,
+                    report.IsDeleted
                 );
             }
         }
 
-        int IGenericRepository<Report>.Create(Report model)
+        public async Task DeleteAsync(int reportId)
+        {
+            using (var connection = _context.CreateConnection())
+            {
+                var sql = "UPDATE Reports SET IsDeleted = 1, ModifiedAt = @ModifiedAt WHERE ReportId = @ReportId";
+                await connection.ExecuteScalarAsync<int>(sql,
+                    new { ReportId = reportId, ModifiedAt = DateTime.UtcNow });
+            }
+        }
+
+        public int Create(Report model)
         {
             throw new NotImplementedException();
         }

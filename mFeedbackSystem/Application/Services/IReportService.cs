@@ -4,6 +4,6 @@ namespace Application.Services
 {
     public interface IReportService
     {
-        Task<Report?> Create(string title, string description, int createdBy);
+        Task<Report?> CreateAsync(string title, string description, int createdBy);
     }
 }
