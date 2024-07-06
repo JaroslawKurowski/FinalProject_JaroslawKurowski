@@ -13,5 +13,11 @@ namespace Persistence.Repositories
         int Create(TModel model);
         bool Update(TModel model);
         bool Delete(int id);
+
+        //Task<TModel?> FindByIdAsync(int id);
+        //Task<IEnumerable<TModel>> GetAllAsync();
+        //Task<int> CreateAsync(TModel model);
+        //Task<bool> UpdateAsync(TModel model);
+        //Task<bool> DeleteAsync(int id);
     }
 }

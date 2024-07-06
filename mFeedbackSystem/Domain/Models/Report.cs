@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +19,9 @@ namespace Domain.Models
         public DateTime CreatedAt { get; }
         public int? ModifiedBy { get; private set; }
         public DateTime? ModifiedAt { get; private set; }
+        public bool IsDeleted { get; private set; }
 
-        public Report(int reportId, string title, string description, ReportStatus status, DateTime? startDate, DateTime? endDate, int createdBy, DateTime createdAt, int? modifiedBy, DateTime? modifiedAt)
+        public Report(int reportId, string title, string description, ReportStatus status, DateTime? startDate, DateTime? endDate, int createdBy, DateTime createdAt, int? modifiedBy, DateTime? modifiedAt, bool isDeleted)
         {
             ReportId = reportId;
             Title = title;
@@ -31,6 +33,35 @@ namespace Domain.Models
             CreatedAt = createdAt;
             ModifiedBy = modifiedBy;
             ModifiedAt = modifiedAt;
+            IsDeleted = isDeleted;
+        }
+
+        public static Report Create(string title, string description, int createdBy)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+                throw new ValidationException("Tytuł nie może być pusty.");
+            if (string.IsNullOrWhiteSpace(description))
+                throw new ValidationException("Opis nie może być pusty.");
+
+            return new Report(
+                0, // ReportId będzie generowany przez bazę danych
+                title,
+                description,
+                ReportStatus.Pending,
+                null,
+                null,
+                createdBy,
+                DateTime.UtcNow,
+                null,
+                null,
+                false
+            );
+        }
+
+        public void Delete()
+        {
+            IsDeleted = true;
+            ModifiedAt = DateTime.UtcNow;
         }
     }
 }
