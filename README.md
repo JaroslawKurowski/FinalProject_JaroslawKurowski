@@ -180,10 +180,10 @@ Repozytorium IUserRepository definiuje metodę Authenticate, która sprawdza pop
 8. CRUD dla zgłoszeń.
 9.	CRUD dla promocji.
 10.	Akcje administratora dotyczące zgłoszenia.
-11.	Modyfikacja statusu zgłoszenia.
+11.	Modyfikacja statusu zgłoszenia. SHOULD HAVE
 12.	Nadawanie punktów innowacyjności.
 13.	Zliczanie punktów innowacyjności.
-14.	Logowanie zdarzeń w systemie z Serilog.
-15.	Aplikacja WWW w React do obsługi zgłoszeń (logowanie; dla Usera dodanie zgłoszenia i prezentacja promocji na podstawie zliczonych punktów).
+14.	Logowanie zdarzeń w systemie z Serilog. SHOULD HAVE
+15.	Aplikacja WWW w React do obsługi zgłoszeń (logowanie?; dla Usera dodanie zgłoszenia i prezentacja promocji na podstawie zliczonych punktów).
 
    
