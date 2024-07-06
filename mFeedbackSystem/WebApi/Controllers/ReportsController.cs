@@ -61,8 +61,12 @@ namespace WebApi.Controllers
 
         // DELETE api/<ReportsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Delete(int id)
         {
+            await _reportService.DeleteAsync(id);
+
+            return NoContent();
         }
     }
 }

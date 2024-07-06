@@ -22,5 +22,10 @@ namespace Application.Services
             var report = Report.Create(title, description, createdBy);
             return await _reportRepository.CreateAsync(report);
         }
+
+        public async Task DeleteAsync(int reportId)
+        {
+            await _reportRepository.DeleteAsync(reportId);
+        }
     }
 }
