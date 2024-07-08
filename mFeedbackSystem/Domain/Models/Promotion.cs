@@ -12,22 +12,26 @@ namespace Domain.Models
         public string PromotionName { get; private set; }
         public string Description { get; private set; }
         public int PointsRequired { get; private set; }
+        public int CreatedBy { get; private set; }
+        public DateTime CreatedAt { get; }
         public int? ModifiedBy { get; private set; }
         public DateTime? ModifiedAt { get; private set; }
         public bool IsDeleted { get; private set; }
 
-        public Promotion(int promotionId, string promotionName, string description, int pointsRequired, int? modifiedBy, DateTime? modifiedAt, bool isDeleted)
+        public Promotion(int promotionId, string promotionName, string description, int pointsRequired, int createdBy, DateTime createdAt, int? modifiedBy, DateTime? modifiedAt, bool isDeleted)
         {
             PromotionId = promotionId;
             PromotionName = promotionName;
             Description = description;
             PointsRequired = pointsRequired;
+            CreatedBy = createdBy;
+            CreatedAt = createdAt;
             ModifiedBy = modifiedBy;
             ModifiedAt = modifiedAt;
             IsDeleted = isDeleted;
         }
 
-        public static Promotion Create(string promotionName, string description, int pointsRequired)
+        public static Promotion Create(string promotionName, string description, int pointsRequired, int createdBy)
         {
             if (string.IsNullOrEmpty(promotionName))
                 throw new ArgumentException("Promotion name cannot be empty");
@@ -36,7 +40,7 @@ namespace Domain.Models
             if (pointsRequired <= 0)
                 throw new ArgumentException("Points required must be greater than zero");
 
-            return new Promotion(0, promotionName, description, pointsRequired, null, null, false);
+            return new Promotion(0, promotionName, description, pointsRequired, createdBy, DateTime.UtcNow, null, null, false);
         }
 
         public void Update(string promotionName, string description, int pointsRequired, int modifiedBy)

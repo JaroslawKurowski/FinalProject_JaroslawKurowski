@@ -72,6 +72,8 @@ namespace WebApi
             builder.Services.AddSingleton<IUserService, UserService>();
             builder.Services.AddScoped<IReportRepository, ReportRepository>();
             builder.Services.AddScoped<IReportService, ReportService>();
+            builder.Services.AddScoped<IPromotionRepository, PromotionRepository>();
+            builder.Services.AddScoped<IPromotionService, PromotionService>();
             builder.Services.AddSingleton<JwtTokenService>();
 
             builder.Services.AddHttpContextAccessor(); //ta linia jest niezbêdna do pobierania HttpContext
