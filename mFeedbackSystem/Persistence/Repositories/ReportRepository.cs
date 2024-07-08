@@ -84,9 +84,6 @@ namespace Persistence.Repositories
         {
             using (var connection = _context.CreateConnection())
             {
-                //var sql = "UPDATE Reports SET IsDeleted = 1, ModifiedAt = @ModifiedAt WHERE ReportId = @ReportId";
-                //await connection.ExecuteScalarAsync<int>(sql,
-                //    new { ReportId = reportId, ModifiedAt = DateTime.UtcNow });
                 var sql = "UPDATE Reports SET IsDeleted = 1, ModifiedAt = GETDATE() WHERE ReportId = @Id";
                 var result = await connection.ExecuteAsync(sql, new { Id = id });
                 return result > 0;
