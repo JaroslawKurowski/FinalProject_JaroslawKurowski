@@ -45,9 +45,16 @@ namespace Application.Services
             return await _reportRepository.UpdateStatusAsync(report);
         }
 
-        public async Task DeleteAsync(int reportId)
+        public async Task<bool> DeleteAsync(int id)
         {
-            await _reportRepository.DeleteAsync(reportId);
+            var report = await _reportRepository.GetByIdAsync(id);
+            if (report == null)
+            {
+                return false;
+            }
+
+            report.Delete();
+            return await _reportRepository.DeleteAsync(id);
         }
     }
 }

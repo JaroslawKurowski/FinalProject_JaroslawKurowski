@@ -8,6 +8,6 @@ namespace Application.Services
         Task<IEnumerable<Report>> GetAllAsync();
         Task<Report?> CreateAsync(string title, string description, int createdBy);
         Task<bool> UpdateStatusAsync(int id, ReportStatus status, int? modifiedBy);
-        Task DeleteAsync(int reportId);
+        Task<bool> DeleteAsync(int id);
     }
 }
