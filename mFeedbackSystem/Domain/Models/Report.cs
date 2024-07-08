@@ -58,6 +58,13 @@ namespace Domain.Models
             );
         }
 
+        public void UpdateStatus(ReportStatus status, int? modifiedBy)
+        {
+            Status = status;
+            ModifiedBy = modifiedBy;
+            ModifiedAt = DateTime.UtcNow;
+        }
+
         public void Delete()
         {
             IsDeleted = true;

@@ -11,5 +11,8 @@ namespace Persistence.Repositories
     {
         Task<Report?> CreateAsync(Report report);
         Task DeleteAsync(int reportId);
+        Task<Report?> GetByIdAsync(int id);
+        Task<IEnumerable<Report>> GetAllAsync();
+        Task<bool> UpdateStatusAsync(Report report);
     }
 }
