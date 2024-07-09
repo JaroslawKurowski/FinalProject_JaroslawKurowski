@@ -76,6 +76,17 @@ namespace WebApi
             builder.Services.AddScoped<IPromotionService, PromotionService>();
             builder.Services.AddSingleton<JwtTokenService>();
 
+            //³¹czenie z React
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder =>
+                    builder.WithOrigins("http://localhost:5173")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
+            //
+
             builder.Services.AddHttpContextAccessor(); //ta linia jest niezbêdna do pobierania HttpContext
             builder.Services.AddScoped<LoggedUser>(serviceProvider =>
             {
@@ -103,6 +114,9 @@ namespace WebApi
             }
 
             app.UseHttpsRedirection();
+
+            //React
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
