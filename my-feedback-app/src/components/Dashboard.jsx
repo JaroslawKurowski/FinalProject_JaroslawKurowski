@@ -5,7 +5,7 @@ const Dashboard = () => {
     const navigate = useNavigate();
 
     return (
-        <div>
+        <div className="container">
             <h1>Welcome to the Dashboard</h1>
             <button onClick={() => navigate('/reports')}>Reports</button>
             <button onClick={() => navigate('/promotions')}>Promotions</button>

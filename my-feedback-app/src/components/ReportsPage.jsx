@@ -29,7 +29,7 @@ const ReportsPage = () => {
     };
 
     return (
-        <div>
+        <div className="container">
             <h2>Reports</h2>
             <ul>
                 {reports.map(report => (

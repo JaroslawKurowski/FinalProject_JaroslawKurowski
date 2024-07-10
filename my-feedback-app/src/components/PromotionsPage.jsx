@@ -30,7 +30,7 @@ const PromotionsPage = () => {
     };
 
     return (
-        <div>
+        <div className="container">
             <h2>Promotions</h2>
             <ul>
                 {promotions.map(promotion => (

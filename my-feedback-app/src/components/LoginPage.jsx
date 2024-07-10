@@ -28,16 +28,16 @@ const LoginPage = () => {
     };
 
     return (
-        <div>
+        <div className="container">
             <h2>Login</h2>
             <form onSubmit={handleLogin}>
                 <div>
                     <label>Username:</label>
-                    <input type="text" name="userName" required />
+                    <input type="text" name="userName" required/>
                 </div>
                 <div>
                     <label>Password:</label>
-                    <input type="password" name="password" required />
+                    <input type="password" name="password" required/>
                 </div>
                 <button type="submit">Login</button>
             </form>
