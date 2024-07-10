@@ -21,7 +21,7 @@ const LoginPage = () => {
             const data = await response.json();
             localStorage.setItem('token', data.token);
             alert('Logged in successfully');
-            navigate('/reports'); // Przekierowanie po zalogowaniu
+            navigate('/dashboard'); // Przekierowanie po zalogowaniu
         } else {
             alert('Login failed');
         }

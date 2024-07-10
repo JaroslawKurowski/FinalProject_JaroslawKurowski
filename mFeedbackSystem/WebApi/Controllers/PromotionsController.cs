@@ -32,7 +32,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrator")]
+        [Authorize] //(Roles = "Administrator")]
         public async Task<IActionResult> GetAll()
         {
             var promotions = await _promotionService.GetAllAsync();
