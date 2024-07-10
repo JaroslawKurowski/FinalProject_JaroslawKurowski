@@ -1,20 +1,29 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import CreateReportPage from './components/CreateReportPage';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Header from './components/Header';
 import LoginPage from './components/LoginPage';
 import ReportsPage from './components/ReportsPage';
 import PromotionsPage from './components/PromotionsPage';
 
 const App = () => {
+    const isAuthenticated = localStorage.getItem('token');
+
     return (
         <Router>
-            <Routes>
-                <Route path="/" element={<LoginPage />} /> {/* Dodajemy trasę domyślną */}
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/create-report" element={<CreateReportPage />} />
-                <Route path="/reports" element={<ReportsPage />} />
-                <Route path="/promotions" element={<PromotionsPage />} />
-            </Routes>
+            <div>
+                <Header />
+                <Routes>
+                    <Route path="/" element={<LoginPage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    {isAuthenticated && (
+                        <>
+                            <Route path="/reports" element={<ReportsPage />} />
+                            <Route path="/promotions" element={<PromotionsPage />} />
+                        </>
+                    )}
+                    <Route path="*" element={<Navigate to="/" />} />
+                </Routes>
+            </div>
         </Router>
     );
 };
