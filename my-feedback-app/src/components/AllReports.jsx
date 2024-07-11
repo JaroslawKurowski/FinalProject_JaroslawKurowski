@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getAllReports } from '../api/reportApi';
 
 const AllReports = () => {
@@ -18,14 +18,16 @@ const AllReports = () => {
     }, []);
 
     return (
-        <div>
+        <div className="page">
             <h1>Wszystkie zgłoszenia</h1>
-            {reports.map(report => (
-                <div key={report.reportId}>
-                    <h2>{report.title}</h2>
-                    <p>{report.description}</p>
-                </div>
-            ))}
+            <ul>
+                {reports.map((report, index) => (
+                    <li key={index}>
+                        <strong>Tytuł:</strong> {report.title}<br/>
+                        <strong>Opis:</strong> {report.description}
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };

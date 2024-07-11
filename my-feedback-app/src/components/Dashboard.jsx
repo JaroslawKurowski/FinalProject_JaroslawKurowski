@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
@@ -6,9 +5,9 @@ const Dashboard = () => {
 
     return (
         <div className="container">
-            <h1>Welcome to the Dashboard</h1>
-            <button onClick={() => navigate('/reports')}>Reports</button>
-            <button onClick={() => navigate('/promotions')}>Promotions</button>
+            <h1>Witamy w panelu głównym</h1>
+            <button onClick={() => navigate('/reports')}>Zgłoszenia</button>
+            <button onClick={() => navigate('/promotions')}>Promocje</button>
         </div>
     );
 };

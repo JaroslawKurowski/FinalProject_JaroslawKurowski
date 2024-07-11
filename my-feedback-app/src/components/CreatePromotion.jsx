@@ -17,21 +17,23 @@ const CreatePromotion = () => {
     };
 
     return (
-      <div>
+      <div className="page">
           <h1>Stwórz nową promocję</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="form">
               <input
                   type="text"
                   value={promotionName}
                   onChange={e => setPromotionName(e.target.value)}
                   placeholder="Nazwa promocji"
                   required
+                  className="form-input"
               />
               <textarea
                   value={description}
                   onChange={e => setDescription(e.target.value)}
                   placeholder="Opis"
                   required
+                  className="form-textarea"
               />
               <input
                   type="number"
@@ -39,8 +41,9 @@ const CreatePromotion = () => {
                   onChange={e => setPointsRequired(e.target.value)}
                   placeholder="Wymagane punkty"
                   required
+                  className="form-input"
               />
-              <button type="submit">Stwórz promocję</button>
+              <button type="submit" className="form-button">Stwórz promocję</button>
           </form>
       </div>
     );

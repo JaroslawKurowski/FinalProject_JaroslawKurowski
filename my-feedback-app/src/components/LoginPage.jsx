@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
@@ -20,27 +19,29 @@ const LoginPage = () => {
         if (response.ok) {
             const data = await response.json();
             localStorage.setItem('token', data.token);
-            alert('Logged in successfully');
+            alert('Zalogowano pomyślnie');
             navigate('/dashboard'); // Przekierowanie po zalogowaniu
         } else {
-            alert('Login failed');
+            alert('Logowanie niepoprawne');
         }
     };
 
     return (
         <div className="container">
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label>Username:</label>
-                    <input type="text" name="userName" required/>
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input type="password" name="password" required/>
-                </div>
-                <button type="submit">Login</button>
-            </form>
+            <div className="login-form">
+                <h2>Logowanie</h2>
+                <form onSubmit={handleLogin}>
+                    <div>
+                        <label>Username:</label>
+                        <input type="text" name="userName" required className="form-input"/>
+                    </div>
+                    <div>
+                        <label>Password:</label>
+                        <input type="password" name="password" required className="form-input"/>
+                    </div>
+                    <button type="submit" className="form-button">Zaloguj się</button>
+                </form>
+            </div>
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createReport } from '../api/reportApi';
 
 const CreateReport = () => {
@@ -16,23 +16,25 @@ const CreateReport = () => {
     };
 
     return (
-        <div>
+        <div className="page">
             <h1>Stwórz nowe zgłoszenie</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="form">
                 <input
                     type="text"
                     value={title}
                     onChange={e => setTitle(e.target.value)}
                     placeholder="Tytuł"
                     required
+                    className="form-input"
                 />
                 <textarea
                     value={description}
                     onChange={e => setDescription(e.target.value)}
                     placeholder="Opis"
                     required
+                    className="form-textarea"
                 />
-                <button type="submit">Stwórz zgłoszenie</button>
+                <button type="submit" className="form-button">Stwórz zgłoszenie</button>
             </form>
         </div>
     );

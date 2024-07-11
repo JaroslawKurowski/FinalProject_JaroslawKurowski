@@ -19,15 +19,17 @@ const AllPromotions = () => {
     }, []);
 
     return (
-        <div>
+        <div className="page">
             <h1>Wszystkie promocje</h1>
-            {promotions.map(promotion => (
-                <div key={promotion.id}>
-                    <h2>{promotion.promotionName}</h2>
-                    <p>{promotion.description}</p>
-                    <p><strong>Wymagane punkty:</strong> {promotion.pointsRequired}</p>
-                </div>
-            ))}
+            <ul>
+                {promotions.map((promotion, index) => (
+                    <li key={index}>
+                        <strong>Nazwa promocji:</strong> {promotion.promotionName}<br/>
+                        <strong>Opis:</strong> {promotion.description}<br/>
+                        <strong>Wymagane punkty:</strong> {promotion.pointsRequired}
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };
