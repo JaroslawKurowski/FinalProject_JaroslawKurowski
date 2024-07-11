@@ -9,7 +9,7 @@ const ReportsDashboard = () => {
             <button onClick={() => navigate('/reports/all')}>Pobierz wszystkie zgłoszenia</button>
             <button onClick={() => navigate('/reports/id')}>Pobierz zgłoszenie po jego Id</button>
             <button onClick={() => navigate('/reports/create')}>Stwórz nowe zgłoszenie</button>
-            <button onClick={() => navigate('/reports/update')}>Aktualizuj zgłoszenie</button>
+            <button onClick={() => navigate('/reports/update')}>Aktualizuj status zgłoszenia</button>
             <button onClick={() => navigate('/reports/delete')}>Usuń zgłoszenie</button>
         </div>
     );

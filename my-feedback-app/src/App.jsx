@@ -6,7 +6,7 @@ import ReportsDashboard from './components/ReportsDashboard';
 import AllReports from './components/AllReports';
 import ReportById from './components/ReportById';
 import CreateReport from './components/CreateReport';
-import UpdateReport from './components/UpdateReport';
+import UpdateReportStatus from './components/UpdateReportStatus.jsx';
 import DeleteReport from './components/DeleteReport';
 import PromotionsDashboard from './components/PromotionsDashboard';
 import AllPromotions from './components/AllPromotions';
@@ -32,7 +32,7 @@ const App = () => {
                         <Route path="/reports/all" element={<AllReports />} />
                         <Route path="/reports/id" element={<ReportById />} />
                         <Route path="/reports/create" element={<CreateReport />} />
-                        <Route path="/reports/update" element={<UpdateReport />} />
+                        <Route path="/reports/update" element={<UpdateReportStatus />} />
                         <Route path="/reports/delete" element={<DeleteReport />} />
                         <Route path="/promotions" element={<PromotionsDashboard />} />
                         <Route path="/promotions/all" element={<AllPromotions />} />
