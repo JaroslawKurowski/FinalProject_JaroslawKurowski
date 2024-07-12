@@ -32,8 +32,9 @@ Projekt jest przeznaczony dla:
 
 Projekt ma na celu zwiększenie zaangażowania klientów w procesy innowacyjne oraz poprawę jakości usług świadczonych przez bank, poprzez bezpośrednie uwzględnianie opinii i pomysłów użytkowników.
 
+# ZAKRES PROJEKTU #
 
-#### MUST HAVE
+### MUST HAVE ###
 
 1. Baza danych.
 
@@ -77,14 +78,14 @@ Projekt ma na celu zwiększenie zaangażowania klientów w procesy innowacyjne o
 
 10.  Aplikacja WWW w React.
 
-#### MUST HAVE TO DO
+### MUST HAVE TO DO ###
 
 1.	 Akcje administratora dotyczące zgłoszenia. (8h)
 2.	 Nadawanie punktów innowacyjności. (8h)
 3.	 Zliczanie punktów innowacyjności. (8h)
 4.	 Wdrożenie powyższych na frontend. (8h)
 
-#### SHOULD HAVE
+### SHOULD HAVE ###
 
 1.	Logowanie zdarzeń w systemie z Serilog.
 2.	Testy jednostkowe i integracyjne.
