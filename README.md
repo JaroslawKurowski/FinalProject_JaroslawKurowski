@@ -83,7 +83,7 @@ Projekt ma na celu zwiększenie zaangażowania klientów w procesy innowacyjne o
 1.	 Akcje administratora dotyczące zgłoszenia. (8h)
 2.	 Nadawanie punktów innowacyjności. (8h)
 3.	 Zliczanie punktów innowacyjności. (8h)
-4.	 Wdrożenie powyższych na frontend. (8h)
+4.	 Wdrożenie powyższych na frontend. (16h)
 
 ### SHOULD HAVE ###
 
