@@ -23,6 +23,7 @@ const AllReports = () => {
             <ul>
                 {reports.map((report, index) => (
                     <li key={index}>
+                        <strong>Id zgłoszenia:</strong> {report.reportId}<br/>
                         <strong>Tytuł:</strong> {report.title}<br/>
                         <strong>Opis:</strong> {report.description}
                     </li>

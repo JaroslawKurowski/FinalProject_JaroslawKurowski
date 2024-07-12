@@ -24,6 +24,7 @@ const AllPromotions = () => {
             <ul>
                 {promotions.map((promotion, index) => (
                     <li key={index}>
+                        <strong>Id promocji:</strong> {promotion.promotionId}<br/>
                         <strong>Nazwa promocji:</strong> {promotion.promotionName}<br/>
                         <strong>Opis:</strong> {promotion.description}<br/>
                         <strong>Wymagane punkty:</strong> {promotion.pointsRequired}
