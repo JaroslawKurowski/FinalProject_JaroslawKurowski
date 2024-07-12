@@ -10,9 +10,6 @@ namespace Persistence.Repositories
     public interface IReportRepository : IGenericRepository<Report>
     {
         Task<Report?> CreateAsync(Report report);
-        Task<bool> DeleteAsync(int id);
-        Task<Report?> GetByIdAsync(int id);
-        Task<IEnumerable<Report>> GetAllAsync();
         Task<bool> UpdateStatusAsync(Report report);
     }
 }

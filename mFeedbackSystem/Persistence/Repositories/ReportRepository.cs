@@ -36,6 +36,16 @@ namespace Persistence.Repositories
             }
         }
 
+        public Task<int> Create(Report model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateAsync(Report model)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Report?> CreateAsync(Report report)
         {
             using (var connection = _context.CreateConnection())
@@ -89,12 +99,5 @@ namespace Persistence.Repositories
                 return result > 0;
             }
         }
-
-
-        public Report Get(int id) => throw new NotImplementedException();
-        public IEnumerable<Report> GetAll() => throw new NotImplementedException();
-        public int Create(Report model) => throw new NotImplementedException();
-        public bool Update(Report model) => throw new NotImplementedException();
-        public bool Delete(int id) => throw new NotImplementedException();
     }
 }

@@ -7,9 +7,9 @@ using Domain.Models;
 
 namespace Persistence.Repositories
 {
-    public interface IAdminActionRepository : IGenericRepository<AdminAction>
-    {
-        Task<IEnumerable<AdminAction>> GetAdminActionsByAdminIdAsync(int adminId);
-        Task<IEnumerable<AdminAction>> GetAdminActionsByReportIdAsync(int reportId);
-    }
+    //public interface IAdminActionRepository : IGenericRepository<AdminAction>
+    //{
+    //    Task<IEnumerable<AdminAction>> GetAdminActionsByAdminIdAsync(int adminId);
+    //    Task<IEnumerable<AdminAction>> GetAdminActionsByReportIdAsync(int reportId);
+    //}
 }

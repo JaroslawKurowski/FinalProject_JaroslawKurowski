@@ -74,8 +74,8 @@ namespace WebApi
             builder.Services.AddScoped<IReportService, ReportService>();
             builder.Services.AddScoped<IPromotionRepository, PromotionRepository>();
             builder.Services.AddScoped<IPromotionService, PromotionService>();
-            builder.Services.AddScoped<IAdminActionRepository, AdminActionRepository>();
-            builder.Services.AddScoped<IAdminActionService, AdminActionService>();
+            //builder.Services.AddScoped<IAdminActionRepository, AdminActionRepository>();
+            //builder.Services.AddScoped<IAdminActionService, AdminActionService>();
             builder.Services.AddSingleton<JwtTokenService>();
 
             //³¹czenie z React

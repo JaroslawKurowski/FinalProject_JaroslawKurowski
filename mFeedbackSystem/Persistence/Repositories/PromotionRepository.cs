@@ -35,6 +35,11 @@ namespace Persistence.Repositories
             }
         }
 
+        public Task<int> Create(Promotion model)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Promotion?> CreateAsync(Promotion promotion)
         {
             using (var connection = _context.CreateConnection())
@@ -92,11 +97,5 @@ namespace Persistence.Repositories
                 return result > 0;
             }
         }
-
-        public Promotion Get(int id) => throw new NotImplementedException();
-        public IEnumerable<Promotion> GetAll() => throw new NotImplementedException();
-        public int Create(Promotion model) => throw new NotImplementedException();
-        public bool Update(Promotion model) => throw new NotImplementedException();
-        public bool Delete(int id) => throw new NotImplementedException();
     }
 }

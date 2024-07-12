@@ -7,9 +7,9 @@ using Domain.Models;
 
 namespace Persistence.Repositories
 {
-    public interface IInnovationPointRepository
-    {
-        Task<InnovationPoint?> GetByUserIdAsync(int userId);
-        Task<bool>AddPointsAsync(InnovationPoint innovationPoint);
-    }
+    //public interface IInnovationPointRepository
+    //{
+    //    Task<InnovationPoint?> GetByUserIdAsync(int userId);
+    //    Task<bool>AddPointsAsync(InnovationPoint innovationPoint);
+    //}
 }

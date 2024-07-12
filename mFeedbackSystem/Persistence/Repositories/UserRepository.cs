@@ -18,31 +18,6 @@ namespace Persistence.Repositories
             _context = context;
         }
 
-        public IUser Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<IUser> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Create(IUser model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(IUser model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<User?> Authenticate(string userName, string password)
         {
             using (var connection = _context.CreateConnection())
@@ -51,6 +26,31 @@ namespace Persistence.Repositories
                 var user = await connection.QuerySingleOrDefaultAsync<User>(sql, new { userName, password });
                 return user;
             }
+        }
+
+        public Task<IUser?> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<IUser>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> Create(IUser model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateAsync(IUser model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
