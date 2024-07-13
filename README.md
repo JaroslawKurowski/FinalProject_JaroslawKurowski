@@ -38,7 +38,7 @@ Projekt ma na celu zwiększenie zaangażowania klientów w procesy innowacyjne o
 
 1. Baza danych.
 
-   •	W repozytorium znajduje sie skrypt FeedbackSystem.sql do utworzenia bazy danych.
+   •	W repozytorium znajduje się skrypt FeedbackSystem.sql do utworzenia bazy danych.
 
 2. Repozytorium na GitHub.
 
