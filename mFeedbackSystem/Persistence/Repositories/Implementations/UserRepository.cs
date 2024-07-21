@@ -23,9 +23,26 @@ namespace Persistence.Repositories.Implementations
         {
             using (var connection = _context.CreateConnection())
             {
-                var sql = "SELECT UserId, UserName, Email, Role FROM Users WHERE UserName = @UserName AND PasswordHash = @Password";
-                var user = await connection.QuerySingleOrDefaultAsync<User>(sql, new { userName, password });
+                //var sql = "SELECT UserId, UserName, Email, Role FROM Users WHERE UserName = @UserName AND PasswordHash = @Password";
+                //var user = await connection.QuerySingleOrDefaultAsync<User>(sql, new { userName, password });
+                //return user;
+                var user = await GetByUserNameAsync(userName);
+
+                if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
+                {
+                    return null;
+                }
+
                 return user;
+            }
+        }
+
+        public async Task<User?> GetByUserNameAsync(string userName)
+        {
+            using (var connection = _context.CreateConnection())
+            {
+                var sql = "SELECT * FROM Users WHERE UserName = @UserName";
+                return await connection.QuerySingleOrDefaultAsync<User>(sql, new { UserName = userName });
             }
         }
 

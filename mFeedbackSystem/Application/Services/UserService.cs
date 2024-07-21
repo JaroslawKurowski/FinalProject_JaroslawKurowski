@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Models;
 using Persistence.Repositories.Interfaces;
+using BCrypt.Net;
 
 namespace Application.Services
 {

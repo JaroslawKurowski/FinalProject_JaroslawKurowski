@@ -10,5 +10,6 @@ namespace Persistence.Repositories.Interfaces
     public interface IUserRepository : IGenericRepository<IUser>
     {
         Task<User?> Authenticate(string userName, string password);
+        Task<User?> GetByUserNameAsync(string userName);
     }
 }

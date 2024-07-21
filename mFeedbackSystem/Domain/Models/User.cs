@@ -12,13 +12,19 @@ namespace Domain.Models
         public string UserName { get; private set; }
         public string Email { get; private set; }
         public UserRole Role { get; }
+        public DateTime CreatedAt { get; }
+        public string PasswordHash { get; private set; }
+        public DateTime? PasswordLastChangedAt { get; private set; }
 
-        public User(int userId, string userName, string email, UserRole role = UserRole.User)
+        public User(int userId, string userName, string email, UserRole role, DateTime createdAt, string passwordHash, DateTime? passwordLastChangedAt = null)
         {
             UserId = userId;
             UserName = userName;
             Email = email;
             Role = role;
+            CreatedAt = createdAt;
+            PasswordHash = passwordHash;
+            PasswordLastChangedAt = passwordLastChangedAt;
         }
     }
 }

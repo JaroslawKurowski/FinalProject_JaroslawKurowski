@@ -13,7 +13,7 @@ CREATE TABLE Users (
     Email NVARCHAR(100) NOT NULL,
     Role INT NOT NULL,
     CreatedAt DATETIME NOT NULL,
-    PasswordHash VARBINARY(256) NOT NULL,
+    PasswordHash NVARCHAR(255) NOT NULL,
     PasswordLastChangedAt DATETIME
 );
 
@@ -82,6 +82,8 @@ INSERT INTO Users (UserName, Email, Role, CreatedAt, PasswordHash)
 VALUES 
 ('admin', 'admin@mail.com', 1, GETDATE(), HASHBYTES('SHA2_256', 'Admin12#')),
 ('user', 'user1@mail.com', 0, GETDATE(), HASHBYTES('SHA2_256', 'User345#'));
+
+-- zamiast HASHBYTES - $2a$11$UHEopeSeA/ddm5dKbcZllukSl1lwxXDpqO6VJFtt.dOhQtgZdntMm oraz $2a$11$HK3.aadDYVOL2ugCsVhW4Oyx5XISZEDZ7fqSrMupeE8pVk72f9lni
 
 -- Dodanie przyk³adowych promocji
 INSERT INTO Promotions (PromotionName, Description, PointsRequired, CreatedBy, CreatedAt, IsDeleted)
