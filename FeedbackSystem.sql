@@ -13,7 +13,7 @@ CREATE TABLE Users (
     Email NVARCHAR(100) NOT NULL,
     Role INT NOT NULL,
     CreatedAt DATETIME NOT NULL,
-    PasswordHash NVARCHAR(255) NOT NULL,
+    PasswordHash VARBINARY(256) NOT NULL,
     PasswordLastChangedAt DATETIME
 );
 
@@ -29,10 +29,10 @@ CREATE TABLE Reports (
     CreatedAt DATETIME NOT NULL,
     ModifiedBy INT,
     ModifiedAt DATETIME,
+    IsDeleted BIT NOT NULL DEFAULT 0,
     CONSTRAINT FK_Reports_CreatedBy FOREIGN KEY (CreatedBy) REFERENCES Users(UserId),
     CONSTRAINT FK_Reports_ModifiedBy FOREIGN KEY (ModifiedBy) REFERENCES Users(UserId)
 );
--- Dostêpne statusy: 'Pending', 'InProgress', 'Resolved', 'Closed', 'Rejected'
 
 -- Tabela akcji administratora
 CREATE TABLE AdminActions (
@@ -47,8 +47,7 @@ CREATE TABLE AdminActions (
 
 -- Tabela punktów innowacyjnoœci
 CREATE TABLE InnovationPoints (
-    PointId INT IDENTITY(1,1) PRIMARY KEY,
-    UserId INT NOT NULL,
+    UserId INT PRIMARY KEY,
     Points INT NOT NULL,
     FOREIGN KEY (UserId) REFERENCES Users(UserId)
 );
@@ -58,7 +57,14 @@ CREATE TABLE Promotions (
     PromotionId INT IDENTITY(1,1) PRIMARY KEY,
     PromotionName NVARCHAR(200) NOT NULL,
     Description NVARCHAR(MAX) NOT NULL,
-    PointsRequired INT NOT NULL
+    PointsRequired INT NOT NULL,
+    CreatedBy INT NOT NULL,
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+    ModifiedBy INT NULL,
+    ModifiedAt DATETIME NULL,
+    IsDeleted BIT NOT NULL DEFAULT 0,
+    CONSTRAINT FK_Promotions_CreatedBy FOREIGN KEY (CreatedBy) REFERENCES Users(UserId),
+    CONSTRAINT FK_Promotions_ModifiedBy FOREIGN KEY (ModifiedBy) REFERENCES Users(UserId)
 );
 
 -- Tabela realizacji promocji przez u¿ytkowników
@@ -71,19 +77,15 @@ CREATE TABLE UserPromotions (
     CONSTRAINT FK_UserPromotions_PromotionId FOREIGN KEY (PromotionId) REFERENCES Promotions(PromotionId)
 );
 
--- Dodanie predefiniowanych u¿ytkowników
+-- Dodanie predefiniowanych u¿ytkowników z zahaszowanymi has³ami
 INSERT INTO Users (UserName, Email, Role, CreatedAt, PasswordHash)
 VALUES 
-('admin', 'admin@mail.com', 1, GETDATE(), 'Admin12#'),
-('user', 'user1@mail.com', 0, GETDATE(), 'User345#');
+('admin', 'admin@mail.com', 1, GETDATE(), HASHBYTES('SHA2_256', 'Admin12#')),
+('user', 'user1@mail.com', 0, GETDATE(), HASHBYTES('SHA2_256', 'User345#'));
 
 -- Dodanie przyk³adowych promocji
-INSERT INTO Promotions (PromotionName, Description, PointsRequired)
+INSERT INTO Promotions (PromotionName, Description, PointsRequired, CreatedBy, CreatedAt, IsDeleted)
 VALUES 
-('Discount on Loan', 'Get a discount on your next loan', 100),
-('Free Bank Transfer', 'Enjoy free bank transfers for a month', 50),
-('Premium Support', 'Get access to premium customer support', 200);
-
-SELECT * from Users;
-
-SELECT HASHBYTES('SHA2_256', 'Test12#');
+('Better savings account', 'Enjoy an increased interest rate on your savings account for 3 months.', 100, 1, GETDATE(), 0),
+('Express bank transfers', 'Enjoy free express bank transfers for a month.', 50, 1, GETDATE(), 0),
+('Currency conversion fee', 'No commissions for currency conversion of your card transactions for 1 month.', 200, 1, GETDATE(), 0);

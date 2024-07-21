@@ -72,7 +72,22 @@ namespace WebApi
             builder.Services.AddSingleton<IUserService, UserService>();
             builder.Services.AddScoped<IReportRepository, ReportRepository>();
             builder.Services.AddScoped<IReportService, ReportService>();
+            builder.Services.AddScoped<IPromotionRepository, PromotionRepository>();
+            builder.Services.AddScoped<IPromotionService, PromotionService>();
+            //builder.Services.AddScoped<IAdminActionRepository, AdminActionRepository>();
+            //builder.Services.AddScoped<IAdminActionService, AdminActionService>();
             builder.Services.AddSingleton<JwtTokenService>();
+
+            //³¹czenie z React
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder =>
+                    builder.WithOrigins("http://localhost:5173")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
+            //
 
             builder.Services.AddHttpContextAccessor(); //ta linia jest niezbêdna do pobierania HttpContext
             builder.Services.AddScoped<LoggedUser>(serviceProvider =>
@@ -101,6 +116,9 @@ namespace WebApi
             }
 
             app.UseHttpsRedirection();
+
+            //React
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();

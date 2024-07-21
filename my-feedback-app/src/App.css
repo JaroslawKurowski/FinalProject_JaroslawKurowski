@@ -1,0 +1,197 @@
+/* Globalne style */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+  color: #343a40;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #007bff;
+  font-family: 'Arial', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Stylowanie nagłówka */
+.header {
+  background-color: white;
+  color: #007bff;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #ced4da;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 40px;
+}
+
+/* Stylowanie przycisków */
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  width: 250px; /* Ustawienie stałej szerokości dla przycisków */
+  height: 50px; /* Ustawienie stałej wysokości dla przycisków */
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Stylowanie formularzy logowania */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Stylowanie formularzy */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+.form-input-small {
+  width: 200px; /* Ustawiamy mniejszą szerokość */
+  padding: 5px; /* Mniejszy padding */
+  margin-bottom: 10px;
+  font-size: 14px; /* Mniejsza czcionka */
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  height: 150px;
+}
+
+.form-button {
+  width: 250px; /* Ustawienie stałej szerokości dla przycisków */
+  height: 50px; /* Ustawienie stałej wysokości dla przycisków */
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+/* Stylowanie stron */
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.page h1 {
+  margin-bottom: 20px;
+}
+
+/* Stylowanie list */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 60%; /* Zmniejszamy szerokość listy */
+  max-width: 800px;
+  margin: 0 auto;
+  counter-reset: item; /* Inicjalizacja licznika */
+}
+
+ul li {
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px 0;
+  position: relative;
+  padding-left: 40px; /* Odstęp na numerowanie */
+}
+
+ul li::before {
+  content: counter(item) ".";
+  counter-increment: item; /* Inkrementacja licznika */
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  font-weight: bold;
+  color: #007bff;
+}

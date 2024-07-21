@@ -7,9 +7,8 @@ using Domain.Models;
 
 namespace Persistence.Repositories
 {
-    public interface IReportRepository : IGenericRepository<Report>
+    public interface IPromotionRepository : IGenericRepository<Promotion>
     {
-        Task<Report?> CreateAsync(Report report);
-        Task<bool> UpdateStatusAsync(Report report);
+        Task<Promotion?> CreateAsync(Promotion promotion);
     }
 }

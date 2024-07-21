@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using WebApi.Auth;
 using WebApi.DTOs;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
@@ -21,26 +19,24 @@ namespace WebApi.Controllers
             _loggedUser = loggedUser;
         }
 
-        // GET: api/<ReportsController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<ReportsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [Authorize]
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            var report = await _reportService.GetByIdAsync(id);
+            return report != null ? Ok(report) : NotFound();
         }
 
-        // POST api/<ReportsController>
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetAll()
+        {
+            var reports = await _reportService.GetAllAsync();
+            return Ok(reports);
+        }
+
         [HttpPost]
         [Authorize]
-        //public void Post([FromBody] string value)
-        //{
-        //}
         public async Task<IActionResult> Create([FromBody] ReportDto model)
         {
             if(!ModelState.IsValid)
@@ -51,15 +47,17 @@ namespace WebApi.Controllers
                 return BadRequest("Nie udało się utworzyć zgłoszenia.");
 
             return Ok(report);
+            //return report != null ? Ok(report) : BadRequest("Could not create report.");
         }
 
-        // PUT api/<ReportsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{id}/status")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> UpdateStatus(int id, [FromBody] UpdateStatusDto updateStatusDto)
         {
+            var result = await _reportService.UpdateStatusAsync(id, updateStatusDto.Status, _loggedUser.UserId);
+            return result ? Ok() : NotFound();
         }
 
-        // DELETE api/<ReportsController>/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int id)

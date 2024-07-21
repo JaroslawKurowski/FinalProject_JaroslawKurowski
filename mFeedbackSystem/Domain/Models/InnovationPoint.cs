@@ -8,13 +8,11 @@ namespace Domain.Models
 {
     public class InnovationPoint
     {
-        public int PointId { get; }
         public int UserId { get; private set; }
         public int Points { get; private set; }
 
-        public InnovationPoint(int pointId, int userId, int points)
+        public InnovationPoint(int userId, int points)
         {
-            PointId = pointId;
             UserId = userId;
             Points = points;
         }
