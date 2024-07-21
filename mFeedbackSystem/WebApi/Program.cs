@@ -4,10 +4,11 @@ using System.Text;
 using Application.Services;
 using Microsoft.OpenApi.Models;
 using Persistence.Context;
-using Persistence.Repositories;
 using WebApi.Auth;
 using Domain.Models;
 using System.Security.Claims;
+using Persistence.Repositories.Interfaces;
+using Persistence.Repositories.Implementations;
 
 namespace WebApi
 {

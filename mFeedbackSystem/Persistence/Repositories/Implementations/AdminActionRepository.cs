@@ -7,7 +7,7 @@ using Dapper;
 using Domain.Models;
 using Persistence.Context;
 
-namespace Persistence.Repositories
+namespace Persistence.Repositories.Implementations
 {
     //public class AdminActionRepository : IAdminActionRepository
     //{

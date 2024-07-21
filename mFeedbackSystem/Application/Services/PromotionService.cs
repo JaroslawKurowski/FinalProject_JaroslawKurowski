@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Models;
 using Microsoft.IdentityModel.Tokens;
-using Persistence.Repositories;
+using Persistence.Repositories.Interfaces;
 
 namespace Application.Services
 {
