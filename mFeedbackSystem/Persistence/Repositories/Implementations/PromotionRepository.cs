@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using Persistence.Repositories.Interfaces;
 
-namespace Persistence.Repositories
+namespace Persistence.Repositories.Implementations
 {
     public class PromotionRepository : IPromotionRepository
     {

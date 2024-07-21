@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using Dapper;
 using Domain.Models;
 using Persistence.Context;
+using Persistence.Repositories.Interfaces;
 
-namespace Persistence.Repositories
+namespace Persistence.Repositories.Implementations
 {
     public class UserRepository : IUserRepository
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Models;
-using Persistence.Repositories;
+using Persistence.Repositories.Interfaces;
 
 namespace Application.Services
 {

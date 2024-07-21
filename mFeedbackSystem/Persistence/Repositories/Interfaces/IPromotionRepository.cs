@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Models;
 
-namespace Persistence.Repositories
+namespace Persistence.Repositories.Interfaces
 {
     public interface IPromotionRepository : IGenericRepository<Promotion>
     {
