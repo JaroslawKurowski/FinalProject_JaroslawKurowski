@@ -23,6 +23,19 @@ namespace Persistence.Repositories.Implementations
         {
             using (var connection = _context.CreateConnection())
             {
+                var sql = "SELECT UserId, UserName, Email, Role, CreatedAt, PasswordHash, PasswordLastChangedAt FROM Users WHERE UserName = @UserName";
+                var user = await connection.QuerySingleOrDefaultAsync<User>(sql, new { UserName = userName });
+
+                if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
+                {
+                    return null;
+                }
+
+                return user;
+            }
+            /*
+            using (var connection = _context.CreateConnection())
+            {
                 //var sql = "SELECT UserId, UserName, Email, Role FROM Users WHERE UserName = @UserName AND PasswordHash = @Password";
                 //var user = await connection.QuerySingleOrDefaultAsync<User>(sql, new { userName, password });
                 //return user;
@@ -35,16 +48,17 @@ namespace Persistence.Repositories.Implementations
 
                 return user;
             }
+            */
         }
 
-        public async Task<User?> GetByUserNameAsync(string userName)
-        {
-            using (var connection = _context.CreateConnection())
-            {
-                var sql = "SELECT * FROM Users WHERE UserName = @UserName";
-                return await connection.QuerySingleOrDefaultAsync<User>(sql, new { UserName = userName });
-            }
-        }
+        //public async Task<User?> GetByUserNameAsync(string userName)
+        //{
+        //    using (var connection = _context.CreateConnection())
+        //    {
+        //        var sql = "SELECT * FROM Users WHERE UserName = @UserName";
+        //        return await connection.QuerySingleOrDefaultAsync<User>(sql, new { UserName = userName });
+        //    }
+        //}
 
         public Task<IUser?> GetByIdAsync(int id)
         {
