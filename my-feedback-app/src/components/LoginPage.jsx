@@ -21,6 +21,7 @@ const LoginPage = () => {
             localStorage.setItem('token', data.token);
             alert('Zalogowano pomyślnie');
             navigate('/dashboard'); // Przekierowanie po zalogowaniu
+            window.location.reload(); // Przeładuj stronę, aby zaktualizować stan autoryzacji
         } else {
             alert('Logowanie niepoprawne');
         }

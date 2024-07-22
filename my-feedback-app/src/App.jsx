@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import LoginPage from './components/LoginPage';
 import Dashboard from './components/Dashboard';
@@ -15,6 +15,7 @@ import CreatePromotion from './components/CreatePromotion';
 import UpdatePromotion from './components/UpdatePromotion';
 import DeletePromotion from './components/DeletePromotion';
 import './App.css';
+//import {useEffect, useState} from "react";
 
 const App = () => {
     const isAuthenticated = localStorage.getItem('token');
@@ -32,14 +33,12 @@ const App = () => {
                         <Route path="/reports/all" element={<AllReports />} />
                         <Route path="/reports/id" element={<ReportById />} />
                         <Route path="/reports/create" element={<CreateReport />} />
-                        <Route path="/reports/update" element={<UpdateReportStatus />} />
-                        <Route path="/reports/delete" element={<DeleteReport />} />
+                        <Route path="/reports/update/:id" element={<UpdateReportStatus />} />
                         <Route path="/promotions" element={<PromotionsDashboard />} />
                         <Route path="/promotions/all" element={<AllPromotions />} />
                         <Route path="/promotions/id" element={<PromotionById />} />
                         <Route path="/promotions/create" element={<CreatePromotion />} />
-                        <Route path="/promotions/update" element={<UpdatePromotion />} />
-                        <Route path="/promotions/delete" element={<DeletePromotion />} />
+                        <Route path="/promotions/update/:id" element={<UpdatePromotion />} />
                     </>
                 ) : (
                     <Route path="*" element={<Navigate to="/login" />} />

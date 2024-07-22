@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { getAllPromotions } from "../api/promotionApi";
+import { getAllPromotions, deletePromotion } from "../api/promotionApi";
+import { useNavigate } from 'react-router-dom';
+import deleteReport from "./DeleteReport.jsx";
 
 const AllPromotions = () => {
     const [promotions, setPromotions] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await getAllPromotions();
-
                 setPromotions(data);
             } catch (error) {
                 console.error('Błąd podczas pobierania promocji: ', error);
@@ -17,6 +19,19 @@ const AllPromotions = () => {
 
         fetchData();
     }, []);
+
+    const handleDelete = async (id) => {
+        if (window.confirm('Czy na pewno chcesz usunąć tę promocję?')) {
+            try {
+                await deletePromotion(id);
+                setPromotions(promotions.filter(promotion => promotion.promotionId !== id));
+                alert('Promocja usunięta pomyślnie')
+            } catch (error) {
+                console.error('Błąd podczas usuwania promocji:', error)
+                alert('Błąd podczas usuwania promocji')
+            }
+        }
+    };
 
     return (
         <div className="page">
@@ -28,6 +43,11 @@ const AllPromotions = () => {
                         <strong>Nazwa promocji:</strong> {promotion.promotionName}<br/>
                         <strong>Opis:</strong> {promotion.description}<br/>
                         <strong>Wymagane punkty:</strong> {promotion.pointsRequired}
+                        <button onClick={() => navigate(`/promotions/update/${promotion.promotionId}`)}
+                                className="form-button">Aktualizuj
+                        </button>
+                        <button onClick={() => handleDelete(promotion.promotionId)} className="form-button">Usuń
+                        </button>
                     </li>
                 ))}
             </ul>
