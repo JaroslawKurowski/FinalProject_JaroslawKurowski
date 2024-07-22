@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { getAllReports, deleteReport } from '../api/reportApi';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,10 +25,10 @@ const AllReports = () => {
             try {
                 await deleteReport(id);
                 setReports(reports.filter(report => report.reportId !== id));
-                alert('Zgłoszenie usunięto prawidłowo')
+                toast.success('Zgłoszenie usunięto prawidłowo')
             } catch (error) {
                 console.error('Błąd podczas usuwania zgłoszenia:', error);
-                alert('Błąd podczas usuwania zgłoszenia')
+                toast.error('Błąd podczas usuwania zgłoszenia')
             }
         }
     };
@@ -41,9 +42,7 @@ const AllReports = () => {
                         <strong>Id zgłoszenia:</strong> {report.reportId}<br/>
                         <strong>Tytuł:</strong> {report.title}<br/>
                         <strong>Opis:</strong> {report.description}
-                        <button onClick={() => navigate(`/reports/update/${report.reportId}`)}
-                                className="form-button">Aktualizuj
-                        </button>
+                        <button onClick={() => navigate(`/reports/update/${report.reportId}`)} className="form-button">Aktualizuj</button>
                         <button onClick={() => handleDelete(report.reportId)} className="form-button">Usuń</button>
                     </li>
                 ))}

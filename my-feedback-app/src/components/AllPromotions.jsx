@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllPromotions, deletePromotion } from "../api/promotionApi";
 import { useNavigate } from 'react-router-dom';
-import deleteReport from "./DeleteReport.jsx";
+import {toast} from "react-toastify";
 
 const AllPromotions = () => {
     const [promotions, setPromotions] = useState([]);
@@ -25,10 +25,10 @@ const AllPromotions = () => {
             try {
                 await deletePromotion(id);
                 setPromotions(promotions.filter(promotion => promotion.promotionId !== id));
-                alert('Promocja usunięta pomyślnie')
+                toast.success('Promocja usunięta pomyślnie')
             } catch (error) {
                 console.error('Błąd podczas usuwania promocji:', error)
-                alert('Błąd podczas usuwania promocji')
+                toast.error('Błąd podczas usuwania promocji')
             }
         }
     };
@@ -43,11 +43,8 @@ const AllPromotions = () => {
                         <strong>Nazwa promocji:</strong> {promotion.promotionName}<br/>
                         <strong>Opis:</strong> {promotion.description}<br/>
                         <strong>Wymagane punkty:</strong> {promotion.pointsRequired}
-                        <button onClick={() => navigate(`/promotions/update/${promotion.promotionId}`)}
-                                className="form-button">Aktualizuj
-                        </button>
-                        <button onClick={() => handleDelete(promotion.promotionId)} className="form-button">Usuń
-                        </button>
+                        <button onClick={() => navigate(`/promotions/update/${promotion.promotionId}`)} className="form-button">Aktualizuj</button>
+                        <button onClick={() => handleDelete(promotion.promotionId)} className="form-button">Usuń</button>
                     </li>
                 ))}
             </ul>

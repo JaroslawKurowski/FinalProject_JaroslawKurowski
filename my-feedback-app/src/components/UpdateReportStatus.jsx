@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { getReportById, updateReportStatus } from '../api/reportApi';
 
 const UpdateReportStatus = () => {
@@ -31,11 +32,12 @@ const UpdateReportStatus = () => {
         e.preventDefault();
         try {
             await updateReportStatus(id, status);
-            alert('Status zgłoszenia zaktualizowany pomyślnie!');
+            toast.success('Status zgłoszenia zaktualizowany pomyślnie!');
             setErrorMessage('');
         } catch (error) {
             console.error('Błąd podczas aktualizacji statusu zgłoszenia:', error);
             setErrorMessage('Błąd podczas aktualizacji statusu zgłoszenia.');
+            toast.error('Błąd podczas aktualizacji statusu zgłoszenia.');
         }
     };
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { getPromotionById, updatePromotion } from '../api/promotionApi';
 
 const UpdatePromotion = () => {
@@ -36,11 +37,12 @@ const UpdatePromotion = () => {
         e.preventDefault();
         try {
             await updatePromotion(id, { promotionName, description, pointsRequired });
-            alert('Promocja zaktualizowana pomyślnie!');
+            toast.success('Promocja zaktualizowana pomyślnie!');
             setErrorMessage('');
         } catch (error) {
             console.error('Błąd podczas aktualizacji promocji:', error);
             setErrorMessage('Błąd podczas aktualizacji promocji.');
+            toast.error('Błąd podczas aktualizacji promocji.');
         }
     };
 

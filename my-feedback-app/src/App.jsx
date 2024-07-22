@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, } from 'react-router-dom';
 import Header from './components/Header';
 import LoginPage from './components/LoginPage';
 import Dashboard from './components/Dashboard';
@@ -7,15 +7,12 @@ import AllReports from './components/AllReports';
 import ReportById from './components/ReportById';
 import CreateReport from './components/CreateReport';
 import UpdateReportStatus from './components/UpdateReportStatus.jsx';
-import DeleteReport from './components/DeleteReport';
 import PromotionsDashboard from './components/PromotionsDashboard';
 import AllPromotions from './components/AllPromotions';
 import PromotionById from './components/PromotionById';
 import CreatePromotion from './components/CreatePromotion';
 import UpdatePromotion from './components/UpdatePromotion';
-import DeletePromotion from './components/DeletePromotion';
 import './App.css';
-//import {useEffect, useState} from "react";
 
 const App = () => {
     const isAuthenticated = localStorage.getItem('token');

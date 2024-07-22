@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -19,11 +20,10 @@ const LoginPage = () => {
         if (response.ok) {
             const data = await response.json();
             localStorage.setItem('token', data.token);
-            alert('Zalogowano pomyślnie');
+            toast.success('Zalogowano pomyślnie');
             navigate('/dashboard'); // Przekierowanie po zalogowaniu
-            window.location.reload(); // Przeładuj stronę, aby zaktualizować stan autoryzacji
         } else {
-            alert('Logowanie niepoprawne');
+            toast.error('Logowanie niepoprawne');
         }
     };
 

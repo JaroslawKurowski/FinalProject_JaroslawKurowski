@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { getPromotionById, deletePromotion} from "../api/promotionApi";
+import {toast} from "react-toastify";
 
 const DeletePromotion = () => {
     const [promotionId, setPromotionId] = useState('');
@@ -15,11 +16,12 @@ const DeletePromotion = () => {
             }
 
             await deletePromotion(promotionId);
-            alert('Promocja usunięta pomyślnie!');
+            toast.success('Promocja usunięta pomyślnie!');
             setErrorMessage('');
         } catch (error) {
             console.error('Błąd podczas usuwania promocji:', error);
             setErrorMessage('Promocja o podanym Id nie istnieje.');
+            toast.error('Błąd podczas usuwania promocji')
         }
     };
 

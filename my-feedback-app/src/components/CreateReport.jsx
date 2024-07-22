@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { createReport } from '../api/reportApi';
+import {toast} from "react-toastify";
 
 const CreateReport = () => {
     const [title, setTitle] = useState('');
@@ -9,7 +10,7 @@ const CreateReport = () => {
         e.preventDefault();
         try {
             await createReport({ title, description });
-            alert('Zgłoszenie utworzone pomyślnie!');
+            toast.success('Zgłoszenie utworzone pomyślnie!');
         } catch (error) {
             console.error('Błąd podczas tworzenia zgłoszenia:', error);
         }
