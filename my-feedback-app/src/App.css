@@ -236,3 +236,48 @@ ul li::before {
   font-weight: bold;
   color: #007bff;
 }
+
+/* Stylowanie Sidebar */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-right: 1px solid #ced4da;
+  height: 100vh; /* Full height */
+}
+
+.sidebar-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: 200px; /* Fixed width */
+}
+
+.sidebar-button:hover {
+  background-color: #0056b3;
+}
+
+.logout-button {
+  background-color: #ff0000;
+}
+
+.logout-button:hover {
+  background-color: #cc0000;
+}
+
+/* Stylowanie głównego układu */
+.main-layout {
+  display: flex;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
