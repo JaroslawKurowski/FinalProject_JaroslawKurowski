@@ -1,11 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import {useState} from "react";
 
 const LoginPage = () => {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     const handleLogin = async (event) => {
         event.preventDefault();
+        setLoading(true); // Ustawia loading na true, gdy rozpoczyna się proces logowania
         const userName = event.target.userName.value;
         const password = event.target.password.value;
 
@@ -16,6 +19,8 @@ const LoginPage = () => {
             },
             body: JSON.stringify({ userName, password })
         });
+
+        setLoading(false); // Ustawia loading na false, gdy proces logowania jest zakończony
 
         if (response.ok) {
             const data = await response.json();
@@ -29,6 +34,7 @@ const LoginPage = () => {
 
     return (
         <div className="container">
+            {loading && <LoadingScreen />} {/* Wyświetla ekran ładowania, gdy loading jest true */}
             <div className="login-form">
                 <h2>Logowanie</h2>
                 <form onSubmit={handleLogin}>
@@ -43,6 +49,14 @@ const LoginPage = () => {
                     <button type="submit" className="form-button">Zaloguj się</button>
                 </form>
             </div>
+        </div>
+    );
+};
+
+const LoadingScreen = () => {
+    return (
+        <div className="loading-screen">
+            <div className="loading-spinner"></div>
         </div>
     );
 };
