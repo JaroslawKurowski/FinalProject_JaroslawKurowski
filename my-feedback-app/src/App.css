@@ -34,6 +34,20 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 40px;
 }
 
+.logout-button {
+  padding: 5px 10px;
+  background-color: #ff4b5c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.logout-button:hover {
+  background-color: #ff1c3c;
+}
+
 /* Stylowanie przycisków */
 button {
   padding: 10px 20px;
@@ -91,6 +105,33 @@ button:hover {
 
 .login-form button:hover {
   background-color: #0056b3;
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #007bff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Stylowanie formularzy */
@@ -194,4 +235,49 @@ ul li::before {
   top: 20px;
   font-weight: bold;
   color: #007bff;
+}
+
+/* Stylowanie Sidebar */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-right: 1px solid #ced4da;
+  height: 100vh; /* Full height */
+}
+
+.sidebar-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: 200px; /* Fixed width */
+}
+
+.sidebar-button:hover {
+  background-color: #0056b3;
+}
+
+.logout-button {
+  background-color: #ff0000;
+}
+
+.logout-button:hover {
+  background-color: #cc0000;
+}
+
+/* Stylowanie głównego układu */
+.main-layout {
+  display: flex;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
 }

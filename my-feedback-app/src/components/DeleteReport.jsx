@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { getReportById, deleteReport } from "../api/reportApi";
+import {toast} from "react-toastify";
 
 const DeleteReport = () => {
     const [reportId, setReportId] = useState('');
@@ -17,11 +18,12 @@ const DeleteReport = () => {
 
             // Jeśli zgłoszenie istnieje, próbujemy je usunąć
             await deleteReport(reportId);
-            alert('Zgłoszenie usunięte pomyślnie!');
+            toast.success('Zgłoszenie usunięte pomyślnie!');
             setErrorMessage(''); // Czyścimy komunikat o błędzie po pomyślnym usunięciu
         } catch (error) {
             console.error('Błąd podczas usuwania zgłoszenia:', error);
             setErrorMessage('Zgłoszenie o podanym Id nie istnieje.');
+            toast.error('Błąd podczas usuwania zgłoszenia');
         }
     };
 

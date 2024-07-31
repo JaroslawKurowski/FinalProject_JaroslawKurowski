@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createPromotion } from "../api/promotionApi";
+import {toast} from "react-toastify";
 
 const CreatePromotion = () => {
     const [promotionName, setPromotionName] = useState('');
@@ -10,7 +11,7 @@ const CreatePromotion = () => {
         e.preventDefault();
         try {
             await createPromotion({ promotionName, description, pointsRequired });
-            alert('Promocja utworzona pomyślnie!');
+            toast.success('Promocja utworzona pomyślnie!');
         } catch (error) {
             console.error('Błąd podczas tworzenia promocji:', error);
         }
